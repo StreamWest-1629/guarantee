@@ -15,6 +15,8 @@
 
 package guarantee
 
+import "errors"
+
 // Make new guarantee.Safety instance.
 // When chk argument's expression is valid, this returns guaranteed value and nil error.
 // If not, it returns some error
@@ -89,4 +91,18 @@ func WrapShared(filter Filter, chk string) (unsafe *Shared) {
 	} else {
 		return str
 	}
+}
+
+// Check filter passing or not.
+// Call Initialize function in filter,
+// initFunc argument is given function returning any error.
+func Check(filter Filter, chk string) (passed bool) {
+	passed = false
+	err := errors.New("this is check function.")
+	test := func(str string) error {
+		passed = true
+		return err
+	}
+	filter.Initialize(chk, test)
+	return
 }
