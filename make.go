@@ -98,7 +98,7 @@ func WrapShared(filter Filter, chk string) (unsafe *Shared) {
 // initFunc argument is given function returning any error.
 func Check(filter Filter, chk string) (passed bool) {
 	passed = false
-	err := errors.New("this is check function.")
+	err := errors.New("this is check function")
 	test := func(str string) error {
 		passed = true
 		return err
