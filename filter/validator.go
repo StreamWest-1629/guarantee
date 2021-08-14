@@ -47,7 +47,7 @@ func (v Validator) Clone(chk string, cloneFunc GuaranteeFunc) error {
 }
 
 // Make filter using regular expression.
-func RegexpFilter(r *regexp.Regexp) Filter {
+func RegexpFilter(r *regexp.Regexp) Validator {
 	return Validator(
 		func(chk string) error {
 			if locates := r.FindStringIndex(chk); len(locates) != 2 {
@@ -63,7 +63,7 @@ func RegexpFilter(r *regexp.Regexp) Filter {
 }
 
 // Make filter using list. Internal logic uses converted builtin map.
-func ListMatchingFilter(list ...string) Filter {
+func ListMatchingFilter(list ...string) Validator {
 	mapping := make(map[string]interface{})
 	for _, str := range list {
 		mapping[str] = nil
